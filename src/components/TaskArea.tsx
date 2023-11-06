@@ -11,40 +11,8 @@ import {
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { tasks } from "@/lib/signals";
 import { cn } from "@/lib/utils";
-
-const TODOS = [
-  {
-    title: "Buy milk",
-    completed: true,
-    timeAdded: new Date(),
-  },
-  {
-    title: "Walk the dog",
-    completed: false,
-    timeAdded: new Date(),
-  },
-  {
-    title: "Do laundry",
-    completed: false,
-    timeAdded: new Date(),
-  },
-  {
-    title: "Clean the house",
-    completed: false,
-    timeAdded: new Date(),
-  },
-  {
-    title: "Finish project",
-    completed: false,
-    timeAdded: new Date(),
-  },
-  {
-    title: "Read a book",
-    completed: false,
-    timeAdded: new Date(),
-  },
-];
 
 const TaskArea = () => {
   return (
@@ -55,8 +23,8 @@ const TaskArea = () => {
             SignalTasks
           </CardTitle>
           <CardDescription>
-            You have <span className="font-semibold">{TODOS.length}</span> tasks
-            pending (according to the signals atleast 🤪)
+            You have <span className="font-semibold">{tasks.value.length}</span>{" "}
+            tasks pending (according to the signals atleast 🤪)
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -65,7 +33,7 @@ const TaskArea = () => {
       </Card>
       <ScrollArea className="rounded-md border p-4 my-4">
         <h2 className="text-2xl font-bold tracking-wide mb-4">Tasks List</h2>
-        {TODOS.map(todo => {
+        {tasks.value.map(todo => {
           return (
             <Card key={todo.title} className="mb-4">
               <CardHeader>
@@ -76,7 +44,7 @@ const TaskArea = () => {
                   </span>
                 </CardTitle>
                 <Badge variant="secondary" className="w-max">
-                  Added: {todo.timeAdded.toLocaleDateString()}
+                  Added: {todo.createdAt.toLocaleDateString()}
                 </Badge>
               </CardHeader>
             </Card>
